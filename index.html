@@ -8,11 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap">
 <style>
-/* Layout: a single document column, numbered sections; header answers who / what / how to reach in one screen */
+/* Layout: a photo-backed title band, then a single document column with numbered sections */
 :root{
   --bg:#ffffff; --fg:#1b1d22; --muted:#5d626d; --rule:#dfe1e6; --accent:#2346a8; --soft:#f3f5f9;
   --display:"Archivo","Helvetica Neue",Arial,sans-serif;
   --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --hero-ink:#ffffff; --hero-accent:#c7d4ff; --hero-shade:rgba(12,13,17,.88); --hero-shade-mid:rgba(12,13,17,.5); --hero-shade-clear:rgba(12,13,17,0);
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#15171b; --fg:#e8e9ec; --muted:#a3a8b3; --rule:#2c3038; --accent:#8fa8ff; --soft:#1d2026; color-scheme:dark}}
@@ -28,11 +29,11 @@ h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
 p{margin:12px 0;max-width:65ch}
 
 /* Header */
-.hero{display:grid;grid-template-columns:112px 1fr;gap:24px;align-items:center}
-.hero img{width:112px;aspect-ratio:1/1;object-fit:cover;border-radius:4px;border:1px solid var(--rule)}
+.hero{position:relative;display:flex;align-items:flex-end;min-height:440px;padding:28px;border-radius:4px;overflow:hidden;color:var(--hero-ink);
+  background:linear-gradient(0deg,var(--hero-shade) 0%,var(--hero-shade-mid) 30%,var(--hero-shade-clear) 55%),url("images/portrait-wide.jpg") center 25%/cover no-repeat,#22242a}
 .hero > div{min-width:0}
 h1{font-size:clamp(2rem,6vw,3.2rem);font-weight:800;text-transform:uppercase;letter-spacing:-.01em}
-.role{font-family:var(--display);font-weight:700;font-size:clamp(1.1rem,2.6vw,1.4rem);margin:6px 0 0;color:var(--accent)}
+.role{font-family:var(--display);font-weight:700;font-size:clamp(1.05rem,2.6vw,1.35rem);margin:8px 0 0;color:var(--hero-accent)}
 .status{display:flex;flex-wrap:wrap;gap:6px 18px;margin:12px 0 0;font-family:var(--display);font-size:.95rem;align-items:center}
 .status .grad{color:var(--muted)}
 .status button{font:500 .85rem var(--display)}
@@ -50,17 +51,6 @@ table{width:100%;border-collapse:collapse;font-size:.98rem}
 th,td{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--rule);vertical-align:top}
 th{font-family:var(--display);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500}
 td.when{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--muted)}
-
-/* Project overview cards */
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:18px}
-.card{min-width:0;display:flex;flex-direction:column;gap:6px}
-.card img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--rule);background:var(--soft)}
-.card h3{font-size:1.15rem;margin-top:6px}
-.card h3 a{color:inherit;text-decoration:none}
-.card h3 a:hover{color:var(--accent);text-decoration:underline}
-.card .meta-line{font-family:var(--display);font-size:.88rem;color:var(--muted);margin:0}
-.card p{margin:0;font-size:.98rem}
-.card .links{font-family:var(--display);font-weight:500;font-size:.92rem;display:flex;gap:16px;flex-wrap:wrap;margin-top:2px}
 
 /* Case studies */
 .case{margin-top:40px}
@@ -98,9 +88,8 @@ button{font:500 .85rem var(--display);background:transparent;color:var(--fg);bor
 button:hover{border-color:var(--fg)}
 footer{margin-top:64px;color:var(--muted);font-size:.9rem}
 @media (max-width:560px){
-  .hero{grid-template-columns:72px 1fr;gap:14px;align-items:start}
-  .hero img{width:72px}
-  .cards,.gallery,.vids{grid-template-columns:1fr}
+  .hero{min-height:300px;padding:18px;background:linear-gradient(0deg,var(--hero-shade) 0%,var(--hero-shade-mid) 40%,var(--hero-shade-clear) 70%),url("images/portrait-wide.jpg") 50% 20%/cover no-repeat,#22242a}
+  .gallery,.vids{grid-template-columns:1fr}
 }
 </style>
 
@@ -109,7 +98,6 @@ footer{margin-top:64px;color:var(--muted);font-size:.9rem}
 <div class="page">
 <header>
   <div class="hero">
-    <img src="images/portrait-face.jpg" alt="Portrait of Ciobotenco Toma" width="600" height="600">
     <div>
       <h1>Ciobotenco Toma</h1>
       <p class="role">Technical &amp; Gameplay Designer · Game Audio</p>
@@ -154,37 +142,6 @@ footer{margin-top:64px;color:var(--muted);font-size:.9rem}
 
 <section id="projects">
   <h2><span class="n">3.</span>Projects</h2>
-  <div class="cards">
-    <article class="card">
-      <a href="#house-of-pain" tabindex="-1" aria-hidden="true"><img src="images/cover-house-of-pain.png" alt="" width="624" height="289"></a>
-      <h3><a href="#house-of-pain">House of Pain</a></h3>
-      <p class="meta-line">Solo Unity Developer · 2024–2025</p>
-      <p>An audio-based horror game where the monster hunts you by the noise you make.</p>
-      <div class="links"><a href="#house-of-pain">Case study</a><a href="https://www.youtube.com/watch?v=SY3b_Hw0Td4" target="_blank" rel="noopener">Watch video</a></div>
-    </article>
-    <article class="card">
-      <a href="#mbtl" tabindex="-1" aria-hidden="true"><img src="images/cover-mbtl.png" alt="" width="1414" height="784"></a>
-      <h3><a href="#mbtl">Monsters Brought to Life</a></h3>
-      <p class="meta-line">Sound &amp; Level Design · 2024</p>
-      <p>A game built in 8 weeks around monsters drawn by primary school children, for Concordia Theater.</p>
-      <div class="links"><a href="#mbtl">Case study</a><a href="https://www.youtube.com/watch?v=GGJI44s6boM" target="_blank" rel="noopener">Watch video</a></div>
-    </article>
-    <article class="card">
-      <a href="#stadiums" tabindex="-1" aria-hidden="true"><img src="images/cover-stadiums.png" alt="" width="1298" height="687"></a>
-      <h3><a href="#stadiums">Audio Driven Engagement For Stadiums</a></h3>
-      <p class="meta-line">Sound Design, Sound Engineering &amp; UX · 2025</p>
-      <p>Audio interventions and mini-games that calm football crowds, for Saxion's Ambient Intelligence group.</p>
-      <div class="links"><a href="#stadiums">Case study</a><a href="https://www.youtube.com/watch?v=AiX5TP2Wacc" target="_blank" rel="noopener">Watch video</a></div>
-    </article>
-    <article class="card">
-      <a href="#vr-dementia" tabindex="-1" aria-hidden="true"><img src="images/cover-vr-dementia.png" alt="" width="1600" height="902"></a>
-      <h3><a href="#vr-dementia">VR Dementia Awareness Experience</a></h3>
-      <p class="meta-line">Sound Design in VR · 2026</p>
-      <p>A VR conversation with an AI character living with dementia, scored by an adaptive music system.</p>
-      <div class="links"><a href="#vr-dementia">Case study</a><a href="https://www.youtube.com/watch?v=Soa-IIgQPEs" target="_blank" rel="noopener">Watch video</a></div>
-    </article>
-  </div>
-
   <article class="case" id="house-of-pain">
     <h3>3.1 House of Pain</h3>
     <p class="pitch">An audio-based horror game where the monster hunts you by the noise you make. Built solo in Unity over five months as a study project.</p>
